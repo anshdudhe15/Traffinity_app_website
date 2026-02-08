@@ -1,0 +1,364 @@
+﻿.sos-map-container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.map-container {
+  flex: 1;
+  width: 100%;
+  height: 100%; /* Ensure height is explicit */
+  position: relative;
+  min-height: 500px; /* Fallback height */
+  background-color: #e0e0e0; /* Placeholder background */
+  z-index: 1; /* Ensure map is below sidebar */
+  pointer-events: auto !important; /* Force map to be interactive */
+  cursor: grab;
+}
+
+.map-container:active {
+  cursor: grabbing;
+}
+
+/* Ensure all Leaflet elements are interactive */
+.map-container * {
+  pointer-events: auto !important;
+}
+
+.leaflet-container {
+  cursor: grab !important;
+}
+
+.leaflet-container:active {
+  cursor: grabbing !important;
+}
+
+.leaflet-dragging .leaflet-container {
+  cursor: grabbing !important;
+}
+
+/* Floating Window */
+.sos-sidebar {
+  position: absolute;
+  top: 80px; /* Below Navbar */
+  left: 20px;
+  width: 350px;
+  max-height: calc(100vh - 100px);
+  overflow-y: auto;
+  padding: 20px;
+  border-radius: 16px;
+  z-index: 1000;
+  pointer-events: auto; /* Only sidebar is clickable, not the map behind */
+  
+  /* Liquid Glass Style */
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  transition: all 0.3s ease;
+}
+
+.dark-mode .sos-sidebar {
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.sos-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: #06D6A0;
+  text-shadow: 0 0 10px rgba(6, 214, 160, 0.3);
+}
+
+/* Incident Cards */
+.incident-card {
+  padding: 15px;
+  margin-bottom: 15px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+
+  /* Default: Liquid Glass */
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.dark-mode .incident-card {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+/* Hover: Landing Page Card Style */
+.incident-card:hover, .incident-card.active {
+  transform: translateY(-5px);
+  background: rgba(255, 255, 255, 0.1);
+  border-color: #06D6A0;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2), 
+              0 0 15px rgba(6, 214, 160, 0.4);
+}
+
+.incident-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(6, 214, 160, 0.1) 0%, transparent 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.incident-card:hover::before, .incident-card.active::before {
+  opacity: 1;
+}
+
+.incident-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.incident-type {
+  font-weight: bold;
+  color: #ff4757;
+}
+
+.incident-time {
+  font-size: 0.8rem;
+  opacity: 0.7;
+}
+
+.incident-desc {
+  font-size: 0.9rem;
+  margin-bottom: 10px;
+  line-height: 1.4;
+}
+
+.incident-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+  z-index: 10;
+  position: relative;
+}
+
+.btn-direction, .btn-resolve, .btn-details {
+  flex: 1;
+  padding: 8px;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  pointer-events: auto;
+  z-index: 100;
+  font-size: 0.85rem;
+}
+
+.btn-direction {
+  background: #06D6A0;
+  color: #000;
+}
+
+.btn-direction:hover {
+  background: #05b586;
+  box-shadow: 0 0 10px rgba(6, 214, 160, 0.5);
+  transform: translateY(-1px);
+}
+
+.btn-direction:active {
+  transform: translateY(0);
+}
+
+.btn-details {
+  background: #4A90E2;
+  color: white;
+}
+
+.btn-details:hover {
+  background: #357ABD;
+  box-shadow: 0 0 10px rgba(74, 144, 226, 0.5);
+  transform: translateY(-1px);
+}
+
+.btn-details:active {
+  transform: translateY(0);
+}
+
+.btn-resolve {
+  background: rgba(255, 71, 87, 0.2);
+  color: #ff4757;
+  border: 1px solid #ff4757;
+}
+
+.btn-resolve:hover {
+  background: #ff4757;
+  color: white;
+  transform: translateY(-1px);
+}
+
+.btn-resolve:active {
+  transform: translateY(0);
+}
+
+/* Scrollbar styling */
+.sos-sidebar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.sos-sidebar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.sos-sidebar::-webkit-scrollbar-thumb {
+  background: rgba(6, 214, 160, 0.3);
+  border-radius: 3px;
+}
+
+.sos-sidebar::-webkit-scrollbar-thumb:hover {
+  background: rgba(6, 214, 160, 0.6);
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .sos-sidebar {
+    width: calc(100% - 40px);
+    height: 33vh;
+    max-height: 33vh;
+    top: auto;
+    bottom: 20px;
+    left: 20px;
+    right: 20px;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.85); /* More opaque for readability */
+    backdrop-filter: blur(20px);
+    box-shadow: 0 -5px 20px rgba(0,0,0,0.1);
+  }
+
+  .dark-mode .sos-sidebar {
+    background: rgba(20, 20, 20, 0.85);
+  }
+  
+  .sos-title {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .incident-card {
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+}
+
+/* Modal Styles */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+  backdrop-filter: blur(5px);
+}
+
+.modal-content {
+  width: 90%;
+  max-width: 500px;
+  padding: 25px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  color: #333;
+  animation: modalFadeIn 0.3s ease;
+}
+
+.dark-mode .modal-content {
+  background: rgba(20, 20, 20, 0.95);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+@keyframes modalFadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+  padding-bottom: 10px;
+}
+
+.dark-mode .modal-header {
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.modal-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #06D6A0;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: inherit;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+
+.close-btn:hover {
+  opacity: 1;
+}
+
+.modal-body {
+  margin-bottom: 20px;
+}
+
+.info-row {
+  margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+.info-label {
+  font-weight: 600;
+  font-size: 0.85rem;
+  opacity: 0.7;
+  margin-bottom: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.info-value {
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+/* Hide Scrollbar but keep functionality */
+.sos-sidebar {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+.sos-sidebar::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}

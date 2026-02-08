@@ -1,0 +1,381 @@
+/* ParkHub.css - Theme Definitions */
+
+/* --- Light Mode (Default) --- */
+.parkhub-page {
+  background: rgba(255, 255, 255, 0.95); /* White shade */
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 25px;
+  padding: 30px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+  max-width: 1200px;
+  margin: 0 auto;
+  color: #1a2e35;
+  transition: all 0.3s ease;
+}
+
+.parkhub-page h1 {
+  margin-top: 0;
+  color: #06D6A0; /* Brand color */
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  padding-bottom: 15px;
+  margin-bottom: 25px;
+  font-weight: 700;
+}
+
+/* Form Controls */
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #4a5568;
+}
+
+.form-control {
+  width: 100%;
+  padding: 12px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 1rem;
+  color: #1a2e35;
+  transition: border-color 0.3s, background-color 0.3s, color 0.3s;
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: #06D6A0;
+  box-shadow: 0 0 0 3px rgba(6, 214, 160, 0.1);
+}
+
+/* Buttons */
+.btn-primary {
+  background: linear-gradient(135deg, #06D6A0 0%, #05b588 100%);
+  color: #ffffff;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(6, 214, 160, 0.3);
+}
+
+.btn-secondary {
+  background: #f1f5f9;
+  color: #475569;
+  border: 1px solid #cbd5e1;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-secondary:hover {
+  background: #e2e8f0;
+}
+
+/* Cards inside forms */
+.vehicle-type-card {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 12px !important;
+}
+
+/* Parking Grid */
+.parking-grid {
+  background: #f1f5f9 !important;
+  border: 1px solid #e2e8f0;
+}
+
+.parking-slot {
+  background: #ffffff !important;
+  border-color: #cbd5e1 !important;
+  color: #475569;
+}
+
+/* Manage Parking Layout */
+.parking-management-container {
+  display: flex;
+  gap: 30px;
+}
+
+.parking-view {
+  flex: 2;
+}
+
+.parking-actions {
+  flex: 1;
+  background: #f8f9fa;
+  padding: 20px;
+  border-radius: 8px;
+  height: fit-content;
+}
+
+@media (max-width: 768px) {
+  .parkhub-page {
+    padding: 15px;
+    border-radius: 15px;
+  }
+
+  .parking-management-container {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .parking-view {
+    width: 100%;
+    order: 2; /* Show grid below actions or above? Usually grid is main content. */
+    /* Let's keep grid on top (default order) or move actions to top? */
+    /* If actions are for booking, maybe they should be accessible. */
+    /* But usually you select a slot from grid first. So grid first. */
+    order: 1;
+  }
+
+  .parking-actions {
+    width: 100%;
+    order: 2;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    border-radius: 20px 20px 0 0;
+    box-shadow: 0 -5px 20px rgba(0,0,0,0.1);
+    max-height: 40vh;
+    overflow-y: auto;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    padding: 15px;
+    /* Only show if a slot is selected? Or always? */
+    /* The current UI shows "Select a slot..." if none selected. */
+    /* If I make it fixed bottom, it might cover content. */
+    /* Let's just stack it normally for now, unless user specifically asked for overlay in Manage Parking too. */
+    /* User said "correct the layout for mobile screen size in manage parking". */
+    /* Stacking is safer than fixed overlay which might block the grid. */
+    position: static;
+    max-height: none;
+    box-shadow: none;
+    background: #f8f9fa;
+  }
+}
+
+.parking-slot.available {
+  border-color: #06D6A0 !important;
+  background-color: rgba(6, 214, 160, 0.1) !important;
+  color: #059669;
+}
+
+.parking-slot.booked,
+.parking-slot.occupied {
+  border-color: #ef4444 !important;
+  background-color: rgba(239, 68, 68, 0.1) !important;
+  color: #b91c1c;
+}
+
+.parking-actions {
+  background: #f8fafc !important;
+  color: #1a2e35;
+  border: 1px solid #e2e8f0;
+}
+
+/* Select Dropdown */
+select.form-control {
+  background-color: #ffffff;
+}
+
+/* Alerts */
+.alert-success {
+  background-color: rgba(6, 214, 160, 0.1) !important;
+  color: #059669 !important;
+  border-color: rgba(6, 214, 160, 0.3) !important;
+}
+
+.alert-error {
+  background-color: rgba(239, 68, 68, 0.1) !important;
+  color: #b91c1c !important;
+  border-color: rgba(239, 68, 68, 0.3) !important;
+}
+
+
+/* --- Dark Mode Overrides --- */
+/* Force black background on the wrapper */
+.parkhub-wrapper.dark-mode {
+  background-color: #000000 !important;
+  color: #f1f5f9;
+}
+
+.landing-page.dark-mode .parkhub-page {
+  background: #000000; /* Pure Black */
+  border: 1px solid #333333;
+  color: #f1f5f9;
+  box-shadow: 0 15px 35px rgba(255, 255, 255, 0.05);
+}
+
+.landing-page.dark-mode .parkhub-page h1 {
+  border-bottom: 1px solid #333333;
+}
+
+.landing-page.dark-mode .form-group label {
+  color: #e2e8f0;
+}
+
+.landing-page.dark-mode .form-control {
+  background: #121212; /* Very dark grey for inputs */
+  border: 1px solid #333333;
+  color: white;
+}
+
+.landing-page.dark-mode .form-control:focus {
+  border-color: #06D6A0;
+  background: #000000;
+}
+
+.landing-page.dark-mode .btn-primary {
+  color: #000000; /* Black text on bright green button */
+}
+
+.landing-page.dark-mode .btn-secondary {
+  background: #121212;
+  color: white;
+  border: 1px solid #333333;
+}
+
+.landing-page.dark-mode .btn-secondary:hover {
+  background: #222222;
+}
+
+.landing-page.dark-mode .vehicle-type-card {
+  background: #121212;
+  border: 1px solid #333333 !important;
+}
+
+.landing-page.dark-mode .parking-grid {
+  background: #121212 !important;
+  border: 1px solid #333333;
+}
+
+.landing-page.dark-mode .parking-slot {
+  background: #000000 !important;
+  border-color: #333333 !important;
+  color: white;
+}
+
+.landing-page.dark-mode .parking-slot.available {
+  border-color: #06D6A0 !important;
+  background-color: rgba(6, 214, 160, 0.1) !important;
+  color: #06D6A0;
+}
+
+.landing-page.dark-mode .parking-slot.booked,
+.landing-page.dark-mode .parking-slot.occupied {
+  border-color: #ef4444 !important;
+  background-color: rgba(239, 68, 68, 0.1) !important;
+  color: #ef4444;
+}
+
+.landing-page.dark-mode .parking-actions {
+  background: #121212 !important;
+  color: white;
+  border: 1px solid #333333;
+}
+
+.landing-page.dark-mode select.form-control {
+  background-color: #121212;
+}
+
+.landing-page.dark-mode .alert-success {
+  background-color: rgba(6, 214, 160, 0.1) !important;
+  color: #06D6A0 !important;
+  border: 1px solid rgba(6, 214, 160, 0.2);
+}
+
+.landing-page.dark-mode .alert-error {
+  background-color: rgba(239, 68, 68, 0.1) !important;
+  color: #ef4444 !important;
+  border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+/* Additional styles from ManageParking.jsx */
+.parking-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+  gap: 15px;
+  padding: 20px;
+  border-radius: 8px;
+  min-height: 300px;
+}
+
+.parking-slot {
+  aspect-ratio: 1;
+  border: 2px solid; /* Color defined in theme */
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  position: relative;
+}
+
+.parking-slot:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.slot-label {
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.slot-type {
+  font-size: 0.7rem;
+  color: #64748b; /* Slate 500 */
+}
+
+.landing-page.dark-mode .slot-type {
+  color: #94a3b8; /* Slate 400 */
+}
+
+.slot-icon {
+  font-size: 1.5rem;
+  margin-top: 5px;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  font-size: 0.9rem;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  margin-right: 6px;
+  display: inline-block;
+}
+
+.dot.availa, .dot.occupied { background: #ef4444; }
+.dot.selected { background: #3b82f6; }
+
+.status-badge {
+  padding: 3px 8px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.status-badge.available { background: rgba(6, 214, 160, 0.2); color: #059669; }
+.status-badge.booked, .status-badge.occupied { background: rgba(239, 68, 68, 0.2); color: #b91c1c; }
+
+.landing-page.dark-mode .status-badge.available { color: #06D6A0; }
+.landing-page.dark-mode .status-badge.booked, .landing-page.dark-mode .status-badge.occupilable { color: #06D6A0; }
+.landing-page.dark-mode .status-badge.booked { color: #ef4444; }

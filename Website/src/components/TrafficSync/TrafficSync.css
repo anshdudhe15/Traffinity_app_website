@@ -1,0 +1,203 @@
+.trafficsync-container {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  color: #1a2e35;
+}
+
+.dark-mode .trafficsync-container {
+  color: #e8f5f2;
+}
+
+.trafficsync-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.trafficsync-header h1 {
+  font-size: 2.5rem;
+  color: #06D6A0;
+  margin-bottom: 1rem;
+}
+
+.trafficsync-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+@media (max-width: 900px) {
+  .trafficsync-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.control-panel {
+  background: rgba(255, 255, 255, 0.8);
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+}
+
+.dark-mode .control-panel {
+  background: rgba(18, 18, 18, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.simulation-panel {
+  background: #1a1a1a;
+  border-radius: 16px;
+  min-height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  border: 2px solid #06D6A0;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.road-inputs {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.road-card {
+  background: rgba(6, 214, 160, 0.1);
+  padding: 1rem;
+  border-radius: 8px;
+  border: 1px solid rgba(6, 214, 160, 0.2);
+}
+
+.file-input {
+  width: 100%;
+  padding: 0.5rem;
+  background: white;
+  border-radius: 4px;
+}
+
+.dark-mode .file-input {
+  background: #2a2a2a;
+  color: white;
+}
+
+.calculate-btn {
+  width: 100%;
+  padding: 1rem;
+  background: #06D6A0;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.2s;
+  margin-top: 1rem;
+}
+
+.calculate-btn:hover {
+  transform: translateY(-2px);
+  background: #05b588;
+}
+
+.calculate-btn:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+/* Simulation Visuals */
+.intersection {
+  position: relative;
+  width: 300px;
+  height: 300px;
+  background: #333;
+}
+
+.road {
+  position: absolute;
+  background: #444;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.road-vertical {
+  width: 60px;
+  height: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-left: 2px dashed #fff;
+  border-right: 2px dashed #fff;
+}
+
+.road-horizontal {
+  width: 100%;
+  height: 60px;
+  top: 50%;
+  transform: translateY(-50%);
+  border-top: 2px dashed #fff;
+  border-bottom: 2px dashed #fff;
+}
+
+.traffic-light {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #000;
+  border: 2px solid #555;
+  position: absolute;
+  transition: background-color 0.3s;
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+
+.light-green { background: #06D6A0; box-shadow: 0 0 15px #06D6A0; }
+.light-red { background: #ff4757; box-shadow: 0 0 15px #ff4757; }
+.light-yellow { background: #ffa502; box-shadow: 0 0 15px #ffa502; }
+
+/* Positioning lights for 4-way */
+.light-top { top: 80px; left: 160px; }
+.light-right { top: 160px; right: 80px; }
+.light-bottom { bottom: 80px; left: 110px; }
+.light-left { top: 110px; left: 80px; }
+
+.timer-display {
+  position: absolute;
+  color: white;
+  font-weight: bold;
+  font-size: 12px;
+  background: rgba(0,0,0,0.7);
+  padding: 2px 4px;
+  border-radius: 4px;
+}
+
+.results-panel {
+  margin-top: 2rem;
+  padding: 1rem;
+  background: rgba(6, 214, 160, 0.1);
+  border-radius: 8px;
+}
+
+.vehicle-counts {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  font-size: 0.8rem;
+  margin-top: 5px;
+}
+
+.count-badge {
+  background: rgba(0,0,0,0.2);
+  padding: 2px 6px;
+  border-radius: 4px;
+}
